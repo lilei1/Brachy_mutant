@@ -25,9 +25,9 @@ foreach my $row (<OUT>){
             }
         }
         my $missing = $count / ($#rtemp+1);
-        print "$count\t$#rtemp\n";
+        #print "$count\t$#rtemp\n";
         if ($missing <= $threshold){
-            #print "$row\n";
+            print "$row\n";
         }
         #print "$tt[0]\n";
 }
