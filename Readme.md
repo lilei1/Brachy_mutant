@@ -169,4 +169,45 @@ for i in $(cat Sorghum_orth_Bd21-3_genelist.txt) ; do printf '%s\t%s\t%s\n'  $i
 
 For some reason, there are 19 genes unable to find the orthologs from the whole ortholog list from phytozome 13, I have do blast the aa sequences of those genes against the whole proteome mannually and save them as ASAP_blast_genelist.txt
 
+### 11. Fill the blanks for the gene list with blast approach
+
+```
+for i in $(cat ASAP_blast_genelist.txt) ; do printf '%s\t%s\t%s\n'  $i $(grep "$i" ./filtered_calls/combined/nonsyn.csv|wc -l) $(grep "$i" ./filtered_calls/combined/high_effect_all.csv|wc -l); done >ASAP_blast_genelist.txt_high_nonsyn.txt
+
+```
+
+### 12. Check if they have T-DNA insertions [T_DNA_finding.pl](https://github.com/lilei1/Brachy_mutant/blob/master/scripts/T_DNA_finding.pl):
+
+```
+./T_DNA_finding.pl ~/Projects/Brachy_mutant/genic_T_DNA_full_Bd21-3.txt ~/Projects/Brachy_mutant/ASAP_blast_genelist.txt >~/Projects/Brachy_mutant/ASAP_blast_genelistT_DNA.txt
+```
+### 12 count the total nonsyn and high effect mutations:
+
+```
+wc -l nonsyn.csv
+wc -l  high_effect_all.csv
+```
+
+### 13 count the genes with the high-effect or nonsyn mutations with 
+
+```
+./count_genes_mutants.pl ~/Projects/Brachy_mutant/filtered_calls/combined/nonsyn.csv
+
+./count_genes_mutants.pl ~/Projects/Brachy_mutant/filtered_calls/combined/high_effect_all.csv >~/Projects/Brachy_mutant/filtered_calls/combined/high_effect_all_genelist.txt
+```
+
+### 14 Find the genes with both T-DNA insetions and high effect mutations:
+
+```
+comm -12 <(sort unique_T_DNA_genelist.txt) <(sort ./filtered_calls/combined/high_effect_all_genelist.txt)|wc -l
+```
+
+### Results about the stats:
+
+| Categories        | Total           | Genic  | Genes        
+| ------------- |:-------------:| -----:| -----:|
+| nonsyn mutations      | 246,574 | 246,574 | 33,609|
+| High_effect mutations  | 17,774      |   17,774 | 11,365|
+| T-DNA inserts | 25,977      |   15,433 | 10,600|
+| |
 
