@@ -148,3 +148,25 @@ Click Filters, and select Brachypodium distachyon v3.2 (or v3.1 if you’re inte
 ```
 The files are in the [Raw_data](https://github.com/lilei1/Brachy_mutant/tree/master/Raw_data).
 
+### 8. Find the orthologs for Tansporter gene list with [sorghum_orth_finding.pl](https://github.com/lilei1/Brachy_mutant/blob/master/scripts/sorghum_orth_finding.pl)
+
+```
+./sorghum_orth_finding.pl ~/Projects/Brachy_mutant/Bd21-3_Sorghum.txt ~/Projects/Brachy_mutant/transporter_genelist.txt >~/Projects/Brachy_mutant/transporter_genelist_Sorghum.txt
+```
+
+### 9. Fill the blank for the ASAP gene list:
+
+```
+for i in $(cat Sorghum_orth_Bd21-3_genelist.txt) ; do printf '%s\t%s\t%s\n'  $i $(grep "$i" ./filtered_calls/combined/nonsyn.csv|wc -l) $(grep "$i" ./filtered_calls/combined/high_effect_all.csv|wc -l); done >Sorghum_orth_Bd21-3_high_nonsyn.txt
+```
+
+### 10. Check if they have T-DNA insertions for those genes with [T_DNA_finding.pl](https://github.com/lilei1/Brachy_mutant/blob/master/scripts/T_DNA_finding.pl).:
+
+```
+./T_DNA_finding.pl ~/Projects/Brachy_mutant/genic_T_DNA_full_Bd21-3.txt ~/Projects/Brachy_mutant/Sorghum_orth_Bd21-3_genelist.txt >~/Projects/Brachy_mutant/Sorghum_orth_Bd21-3_genelist_T_DNA.txt
+
+```
+
+For some reason, there are 19 genes unable to find the orthologs from the whole ortholog list from phytozome 13, I have do blast the aa sequences of those genes against the whole proteome mannually and save them as ASAP_blast_genelist.txt
+
+
