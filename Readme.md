@@ -114,12 +114,37 @@ vi combined_all.csv
 :g/row/d
 ```
 
-### 3. extract the high effect mutations and nonsyn
+### 3. Extract the high effect mutations and nonsyn
 
 ```
 grep "HIGH" combined_all.csv >high_effect_all.csv
 grep "NON_SYNONYMOUS" combined_all.csv >nonsyn.csv
 ```
 
+### 4. Find the corresponding counts for each gene:
 
+```
+for i in $(cut -f 1  transporter.txt) ; do printf '%s\t%s\t%s\n'  $i $(grep "$i" nonsyn.csv|wc -l) $(grep "$i" high_effect_all.csv|wc -l); done >transporter_high_nonsyn.txt
+```
+
+### 5. Dowbload the map file between the Bd-21 and Bd-21-3 for each gene via this [link](https://genome.jgi.doe.gov/portal/Phytozome/download/_JAMO/5da7a3b8aa74fab996deb6b0/BdistachyonBd21_3_460_v1.1.synonym.txt?requestTime=1584748531).
+
+### 6. Deal with the T-DNA files with [T_DNA_finding.pl](https://github.com/lilei1/Brachy_mutant/blob/master/scripts/T_DNA_finding.pl).
+
+```
+./T_DNA_finding.pl ~/Projects/Brachy_mutant/genic_T_DNA_full_Bd21-3.txt ~/Projects/Brachy_mutant/transporter_genelist.txt >~/Projects/Brachy_mutant/transporter_genelist_T_DNA.txt
+```
+
+### 7. Find the orthologs for the Sorguhm and Brachypodium distachyon according to David Goodstein's instruction:
+
+```
+Choose the Phytozome V13 Genomes and Families -> Phytozome v13 Genomes data set
+Click Filters, and select Brachypodium distachyon v3.2 (or v3.1 if you’re interested in the previous one.
+-Click Attributes and select “Orthology”
+-Select B sylvaticum in the organism filter.
+-Click Counts
+-click Results
+-export via Compressed web file (notify by email)
+```
+The files are in the [Raw_data](https://github.com/lilei1/Brachy_mutant/tree/master/Raw_data).
 
