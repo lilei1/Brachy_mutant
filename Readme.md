@@ -196,7 +196,7 @@ wc -l  high_effect_all.csv
 ./count_genes_mutants.pl ~/Projects/Brachy_mutant/filtered_calls/combined/high_effect_all.csv >~/Projects/Brachy_mutant/filtered_calls/combined/high_effect_all_genelist.txt
 ```
 
-### 14 Find the genes with both T-DNA insetions and high effect mutations:
+### 14. Find the genes with both T-DNA insetions and high effect mutations:
 
 ```
 comm -12 <(sort unique_T_DNA_genelist.txt) <(sort ./filtered_calls/combined/high_effect_all_genelist.txt)|wc -l
@@ -211,4 +211,8 @@ comm -12 <(sort unique_T_DNA_genelist.txt) <(sort ./filtered_calls/combined/high
 | T-DNA inserts | 25,977      |   15,433 | 10,600|
 | |
 
-[Genes with T-DNA insertions]()
+- [Genes with T-DNA insertions](https://github.com/lilei1/Brachy_mutant/blob/master/Results/unique_T_DNA_genelist.txt)
+
+- [High effect gene list](https://github.com/lilei1/Brachy_mutant/blob/master/Results/high_effect_all_genelist.txt)
+
+- [Genes with both T-DNA inserts and high-effect mutations](https://github.com/lilei1/Brachy_mutant/blob/master/Results/3760_both_high_T_DNA.genelist.txt)
