@@ -18,11 +18,14 @@ foreach my $row (<OUT>){
         chomp $row;
         my @rtemp = split(/\,/,$row);
         my $effect;
-        if ($rtemp[14] =~ /NON_SYNONYMOUS_CODING/){
+        if ($rtemp[14] =~ /^NON_SYNONYMOUS_CODING/){
              $effect = "MISSENSE";
         }
-        elsif($rtemp[14] =~ /SYNONYMOUS_CODING/){
+        elsif($rtemp[14] =~ /^SYNONYMOUS_CODING/){
              $effect = "SILENT";
+        }
+        elsif($rtemp[14] =~ /^STOP_GAINED*/){
+             $effect = "NONSENSE";
         }
         else{
             $effect = "";
