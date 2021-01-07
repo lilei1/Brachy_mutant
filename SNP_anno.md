@@ -1,11 +1,34 @@
-# Aim: This analysis is to predict 
+# Aim: This analysis is to predict which SNPs are deleterious
+# Since the ANNOVAR software will need to feed the vcf file without any modification, I have ask Joel Martin send me the vcf files before running SNPeff.
+# Here is the directory and list of the files:
 
-I've got a bunch of the csv files from Amy. Those files are Sodium Azide Mutant Lines. All of the unfiltred files sent from Amy is [here](https://drive.google.com/drive/u/1/folders/1HUXy6GOxppKtJzExaMLmEx7mjcEo7L1l).
-
- John wanted me to fill the blanks for the excel he sent to me, which is shared in the [Raw_data](https://github.com/lilei1/Brachy_mutant/tree/master/Raw_data): `ASAP genes Chris Maker All3yearTFset.xlsx` and `transporter genes.xlsx`
+```
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.0.gatk.hf.sc.vcf.gz 
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.1.gatk.hf.sc.vcf.gz 
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.2.gatk.hf.sc.vcf.gz 
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.3.gatk.hf.sc.vcf.gz 
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.4.gatk.hf.sc.vcf.gz 
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.5,13-16.part1.gatk.hf.sc.vcf.gz 
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.5,13-16.part2.gatk.hf.sc.vcf.gz 
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.5,13-16.part3.gatk.hf.sc.vcf.gz 
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.6.gatk.hf.sc.vcf.gz 
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.7.gatk.hf.sc.vcf.gz 
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.8.gatk.hf.sc.vcf.gz 
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.9.gatk.hf.sc.vcf.gz 
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.10.gatk.hf.sc.vcf.gz 
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.11.gatk.hf.sc.vcf.gz 
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.12.gatk.hf.sc.vcf.gz 
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.17.gatk.hf.sc.vcf.gz 
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.18.gatk.hf.sc.vcf.gz 
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.21.gatk.hf.sc.vcf.gz 
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.22.gatk.hf.sc.vcf.gz 
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.23.gatk.hf.sc.vcf.gz 
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.24.gatk.hf.sc.vcf.gz 
+```
 
 ## The processes I did:
 
-### 1. filter the plates with ≥50% missingness of the accessions with [filter_plates.pl](https://github.com/lilei1/Brachy_mutant/blob/master/scripts/filter_plates.pl):
+### 1. Combined all of the vcf files together with bcftools
 
-```
+
+
