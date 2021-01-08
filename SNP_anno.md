@@ -193,8 +193,28 @@ Submitted batch job 37672877
 sbatch -C haswell /global/projectb/scratch/llei2019/jobs/run_convert2annovar.sub 
 ```
 
-    -e' convert the annovaar table into unified table with [run_table_annovar.sub] ()
+    -e' convert the annovaar table into unified table with [run_table_annovar.sub] (https://github.com/lilei1/Brachy_mutant/blob/master/jobs/run_table_annovar.sub)
     
 ```
+sbatch -C haswell ~/bscratch/jobs/run_table_annovar.sub
+```
+
+only extract the nonsyn SNPs
 
 ```
+grep "No" ANNOVARBd21_3_annovar.SNP_unified_all_varaints.table >nonsyn.ANNOVARBd21_3_annovar.SNP_unified_all_varaints.table
+grep -v "*" nonsyn.ANNOVARBd21_3_annovar.SNP_unified_all_varaints.table >purify_nonsyn.ANNOVARBd21_3_annovar.SNP_unified_all_varaints.table
+
+cut -f 2,3,7,8 purify_nonsyn.ANNOVARBd21_3_annovar.SNP_unified_all_varaints.table >nonsyn.annovar.txt
+```
+
+Check files:
+
+```
+ diff -y  <(sort -k1,1 -k2,2n sorted_unique_nonsynSNPs_tab.txt) <(sort -k1,1 -k2,2n nonsyn.annovar.txt)|grep -v ">"|grep -v "<"|grep -v "|"|wc -l
+201,931
+
+```
+
+Thus, file `purify_nonsyn.ANNOVARBd21_3_annovar.SNP_unified_all_varaints.table` will be used for feeding BAD_Mutation!!!!
+
