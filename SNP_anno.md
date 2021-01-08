@@ -186,3 +186,15 @@ The a-d steps are the same as the nonsyn. SNPs processing,
 Submitted batch job 37672877
 (/global/homes/l/llei2019/bscratch/software/my_work_en) 
 ```
+
+    - f' Annotation with Annovar with [run_convert2annovar.sub] (https://github.com/lilei1/Brachy_mutant/blob/master/jobs/run_anno_variants.sub)
+    
+```
+sbatch -C haswell /global/projectb/scratch/llei2019/jobs/run_convert2annovar.sub 
+```
+
+    -e' convert the annovaar table into unified table with [run_table_annovar.sub] ()
+    
+```
+
+```

@@ -1,0 +1,10 @@
+#!/bin/bash
+#SBATCH --qos=genepool
+#SBATCH --time=24:00:00
+#SBATCH --nodes=10
+#SBATCH --account=plant
+#SBATCH --job-name=table_annovvar
+#SBATCH --output=table_annovvar.out
+#SBATCH --error=table_annovvar.err
+
+python /global/u2/l/llei2019/Github/Brachy_mutant/scripts/ANNOVAR_To_Effects.py /global/cscratch1/sd/llei2019/Bdist_mutant/ANNOVAR/Bd21_3_annovar_in_SNPs.txt.variant_function /global/cscratch1/sd/llei2019/Bdist_mutant/ANNOVAR/Bd21_3_annovar_in_SNPs.txt.exonic_variant_function >/global/cscratch1/sd/llei2019/Bdist_mutant/ANNOVARBd21_3_annovar_unified_all_varaints.table
