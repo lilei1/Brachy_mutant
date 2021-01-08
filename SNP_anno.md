@@ -1,6 +1,6 @@
 # Aim: This analysis is to predict which SNPs are deleterious
-# Since the ANNOVAR software will need to feed the vcf file without any modification, I have ask Joel Martin send me the vcf files before running SNPeff.
-# Here is the directory and list of the files:
+ Since the ANNOVAR software will need to feed the vcf file without any modification, I have ask Joel Martin send me the vcf files before running SNPeff.
+ Here is the directory and list of the files:
 
 ```
 /global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.0.gatk.hf.sc.vcf.gz 
@@ -34,6 +34,7 @@ The job script can be see [here](https://github.com/lilei1/Brachy_mutant/blob/ma
 
 ```
 sbatch -C haswell /global/projectb/scratch/llei2019/jobs/bcf_merge.sub
+
 ```
 The merged vcf file can be avaible at this path `/global/cscratch1/sd/llei2019/Bdist_mutant/plate.0_24.gatk.hf.sc.vcf.gz`
 
@@ -71,6 +72,7 @@ vcftools --gzvcf /global/u2/l/llei2019/cscratch/Bdist_mutant/nonsyn_plate.0_24.g
 ```
 
 ### 3. check the SNPs from the file `/global/u2/l/llei2019/cscratch/Bdist_mutant/reanno_all/biSNPs_nonsyn_plate.0_24.gatk.hf.sc.vcf`
+
 I found ~4% of the SNPs in the csv file but not in the vcf file, and I am contacting Joel and tried to figure out what is going on with those file. Maybe Test Plate and Tubes are missing??
 Slack with Joel and I figured out that "Test Plate" = "plate0", so that could be because of missing samples from tubes. Joel is going to check those SNPs and return me the vcf file back.
 
@@ -177,7 +179,7 @@ vcftools --gzvcf /global/u2/l/llei2019/cscratch/Bdist_mutant/plate.0_24.gatk.hf.
 
 The a-d steps are the same as the nonsyn. SNPs processing,
 
-    - e' convert the vcf file from GATK to the format vcf ANNOVAR liked with run_anno_variants.sub ():
+    - e' convert the vcf file from GATK to the format vcf ANNOVAR liked with [run_anno_variants.sub] (https://github.com/lilei1/Brachy_mutant/blob/master/jobs/run_convert2annovar.sub):
     
 ```    
  sbatch -C haswell ~/bscratch/jobs/run_anno_variants.sub
