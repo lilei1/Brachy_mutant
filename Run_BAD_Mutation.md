@@ -51,13 +51,11 @@ python BAD_Mutations.py -v DEBUG fetch -c /global/projectb/scratch/llei2019/soft
 ```
 #TEST
 python BAD_Mutations.py -v DEBUG align -c /global/projectb/scratch/llei2019/software/BAD_Mutations/BAD_Mutations_Config.txt -f /global/projectb/scratch/llei2019/Bd21_3_mutant/BAD_Mutations/test/BdiBd21_3.1G0016800.1.fasta -o . 2> BdiBd21_3.1G0016800.1.log
-```
+
 
 #Job
-Jacob will adapt the [run_align_BAD_Mutation.sub] (https://github.com/lilei1/Brachy_mutant/blob/master/jobs/run_align_BAD_Mutation.sub)
+Jacob will adapt the [run_align_BAD_Mutation.sub](https://github.com/lilei1/Brachy_mutant/blob/master/jobs/run_align_BAD_Mutation.sub)
 Virginia, Jacob, and I will submit job array for each batch.
-
-```
 
 ```
 
