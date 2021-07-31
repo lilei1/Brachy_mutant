@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 ##by Li Lei, 2021-06-23, El Cerrito;
-#this is to add the aa changes to the current file!!!!
-#You need have combined plates data and the annotation output from previous scripts
+#this is to add the dSNPs predicted by BAD_mutations to the current file!!!!
+#You need have combined plates data and dSNPs file with masked or unmasked approaches!!!
 #usage: 
 use strict;
 use warnings;
@@ -17,7 +17,7 @@ open(OUT,  "$file1") or die "Could not open $file1";
 foreach my $row (<OUT>){
         chomp $row;
         my @rtemp = split(/\t/,$row);
-       $hash{$rtemp[0]} = $row;
+       $hash{$rtemp[1]} = $rtemp[27];
  }
 close (OUT);
 
@@ -29,10 +29,8 @@ foreach my $row (<FILE>){
         my @rtemp = split(/\,/,$row);
         my $snpid = $rtemp[2].".".$rtemp[3];
         if (exists $hash {$snpid}){
-                my $value = $hash {$snpid};
-                my @array = split(/\t/,$value);
-                if (defined($array[5])){
-                    print "$rtemp[0]\,$rtemp[1]\,$rtemp[2]\,$rtemp[3]\,$rtemp[4]\,$rtemp[5]\,$rtemp[6]\,$rtemp[7]\,$rtemp[8]\,$rtemp[9]\,$rtemp[10]\,$rtemp[11]\,$rtemp[12]\,$array[1]\,$array[2]\,$array[3]\,$array[4]\,$rtemp[17]\,$rtemp[18]\,$array[5]\n";
+                if ($rtemp[14] =~ /NON_SYNONYMOUS/){
+                        print "$row\,$hash{$snpid}\n";
                 }
                 else{
                         print "$row\,None\n";
@@ -45,4 +43,3 @@ foreach my $row (<FILE>){
         
  }
 close (FILE);
-#    print "$count\n";
