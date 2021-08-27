@@ -1,0 +1,10 @@
+#!/bin/bash
+#SBATCH --qos=genepool
+#SBATCH --time=48:00:00
+#SBATCH --nodes=10
+#SBATCH --account=plant
+#SBATCH --job-name=anno_variants_annovvar_snp
+#SBATCH --output=anno_variants_annovvar_snp.out
+#SBATCH --error=anno_variants_annovvar_snp.err
+
+perl /global/projectb/scratch/llei2019/software/annovar/annotate_variation.pl --geneanno --dbtype refGene --buildver Bd21_3 /global/u2/l/llei2019/cscratch/Bdist_mutant/ANNOVAR/Bd21_3_annovar_in_SNPs.txt /global/u2/l/llei2019/cscratch/Bdist_mutant/ANNOVAR/Bd21_3/

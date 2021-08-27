@@ -1,0 +1,31 @@
+#!/bin/bash
+#SBATCH --qos=genepool
+#SBATCH --time=72:00:00
+#SBATCH --nodes=10
+#SBATCH --account=plant
+#SBATCH --job-name=vcf_mege_mutants
+#SBATCH --output=vcf_mege_mutants_nrdb.out
+#SBATCH --error=vcf_mege_mutants_nrdb.err
+
+bcftools merge /global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.0.gatk.hf.sc.vcf.gz \
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.1.gatk.hf.sc.vcf.gz \
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.2.gatk.hf.sc.vcf.gz \
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.3.gatk.hf.sc.vcf.gz \
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.4.gatk.hf.sc.vcf.gz \
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.5,13-16.part1.gatk.hf.sc.vcf.gz \
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.5,13-16.part2.gatk.hf.sc.vcf.gz \
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.5,13-16.part3.gatk.hf.sc.vcf.gz \
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.6.gatk.hf.sc.vcf.gz \
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.7.gatk.hf.sc.vcf.gz \
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.8.gatk.hf.sc.vcf.gz \
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.9.gatk.hf.sc.vcf.gz \
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.10.gatk.hf.sc.vcf.gz \
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.11.gatk.hf.sc.vcf.gz \
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.12.gatk.hf.sc.vcf.gz \
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.17.gatk.hf.sc.vcf.gz \
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.18.gatk.hf.sc.vcf.gz \
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.21.gatk.hf.sc.vcf.gz \
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.22.gatk.hf.sc.vcf.gz \
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.23.gatk.hf.sc.vcf.gz \
+/global/projectb/scratch/j_martin/brachy-snpcheck/results/plate.24.gatk.hf.sc.vcf.gz \
+--force-samples -O z -o /global/cscratch1/sd/llei2019/Bdist_mutant/plate.0_24.gatk.hf.sc.vcf.gz

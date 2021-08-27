@@ -1,0 +1,19 @@
+#!/bin/bash
+#SBATCH --qos=genepool
+#SBATCH --time=72:00:00
+#SBATCH --nodes=10
+#SBATCH --account=plant
+#SBATCH --array=1-2
+#SBATCH --job-name=align_bad_mutation
+#SBATCH --output=align_bad_mutation-%l.out
+#SBATCH --error=align_bad_mutation-%l.err
+
+#module load python/3.7-anaconda-2019.10
+source activate bad_mutations
+
+FASTAFILES=($(cat /global/projectb/scratch/llei2019/Bd21_3_mutant/BAD_Mutations/align/file_list/nonsyn_gene_fasta_file.list))
+CURRENT_FASTAFILES=${FASTAFILES[${SLURM_ARRAY_TASK_ID}]}
+GENES=($(awk -F"/" '{print $NF}' /global/projectb/scratch/llei2019/Bd21_3_mutant/BAD_Mutations/align/file_list/nonsyn_gene_fasta_file.list|awk -F ".fasta" '{print $1}'))
+CURRENT_GENES=${GENES[${SLURM_ARRAY_TASK_ID}]}
+
+python /global/projectb/scratch/llei2019/software/BAD_Mutations/BAD_Mutations.py -v DEBUG align -c /global/projectb/scratch/llei2019/software/BAD_Mutations/BAD_Mutations_Config.txt -f ${CURRENT_FASTAFILES} -o /global/u2/l/llei2019/bscratch/Bd21_3_mutant/BAD_Mutations/align/out/ 2> /global/u2/l/llei2019/bscratch/Bd21_3_mutant/BAD_Mutations/align/log/${CURRENT_GENES}_Alignment.log
