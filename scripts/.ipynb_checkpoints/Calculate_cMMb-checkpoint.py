@@ -43,7 +43,7 @@ for chrom, markers in ordered_snps.items():
         delta_gen = float(gen[markers[j]][1]) - float(gen[markers[i]][1])
         if delta_phys > 0:
             #cmmb = (delta_gen/delta_phys) * 1000000
-            cmmb = (delta_gen/delta_phys) * 250000 #run 100 kb to see how the result look like!!!
+            cmmb = (delta_gen/delta_phys) * 100000 #run 100 kb to see how the result look like!!!
         else:
             cmmb = 'NA'
         toprint = '\t'.join([chrom, phys[markers[i]][1], phys[markers[j]][1], str(cmmb)])
