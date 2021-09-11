@@ -1,6 +1,6 @@
 # Tutorial for calculate the gene density, TE density, and variants density, recombination rate; and then make a circle plot!
 
-### Step1 calculate the gene density on cori via conda enviroment
+### Step1: calculate the gene density on cori via conda enviroment
 
 Here I used the script and conda enviroment Virginia wrote and installed for her thesis. all of those calculation were performed on nersc cori.
 
@@ -76,3 +76,52 @@ perl -ane 'print "$F[0] \t$F[1]\t$F[3]\t$F[2]\t\+\n"' < pos_added_start_sorted_u
 
 ```
 
+- calculate the SNP density!!!
+
+```
+source activate /global/projectb/sandbox/plant/hybridum/software/grrr
+Rscript /global/projectb/scratch/llei2019/Bd21_3_mutant/Brachy_mutant/scripts/SNP_density/SNPdensity.R Bd21_3 /global/projectb/scratch/llei2019/Bd21_3_mutant/circos/SNP_density/reorder_SNPs.classified /global/projectb/scratch/llei2019/Bd21_3_mutant/circos/gene_density/Bd21-3.chrom.sizes 250000
+```
+
+### Step4: plot the cirecle plot with circos using  enviroment on cori nersc and adapted her conf file
+
+```
+source activate /global/projectb/sandbox/plant/hybridum/software/bigtop
+/global/projectb/sandbox/plant/hybridum/software/bigtop/bin/circos -conf circos.conf -outputdir /global/projectb/scratch/llei2019/Bd21_3_mutant/circos/
+debuggroup summary 0.18s welcome to circos v0.69-8 15 Jun 2019 on Perl 5.022000
+debuggroup summary 0.18s current working directory /global/projectb/scratch/llei2019/Bd21_3_mutant/circos
+debuggroup summary 0.18s command /global/projectb/sandbox/plant/hybridum/software/bigtop/bin/circos -conf circos.conf -outputdir /global/projectb/scratch/llei2019/Bd21_3_mutant/circos/
+debuggroup summary 0.18s loading configuration from file circos.conf
+debuggroup summary 0.18s found conf file circos.conf
+debuggroup summary 0.33s debug will appear for these features: output,summary
+debuggroup summary 0.33s bitmap output image /global/projectb/scratch/llei2019/Bd21_3_mutant/circos/circos.png
+debuggroup summary 0.33s SVG output image /global/projectb/scratch/llei2019/Bd21_3_mutant/circos/circos.svg
+debuggroup summary 0.33s parsing karyotype and organizing ideograms
+debuggroup summary 0.33s karyotype has 5 chromosomes of total size 272,093,243
+debuggroup summary 0.34s applying global and local scaling
+debuggroup summary 0.34s allocating image, colors and brushes
+debuggroup summary 2.09s drawing 5 ideograms of total size 272,093,243
+debuggroup summary 2.09s drawing highlights and ideograms
+debuggroup summary 2.14s found conf file /global/projectb/sandbox/plant/hybridum/software/bigtop/bin/../etc/tracks/histogram.conf
+debuggroup summary 2.14s found conf file /global/projectb/sandbox/plant/hybridum/software/bigtop/bin/../etc/tracks/histogram.conf
+debuggroup summary 2.14s found conf file /global/projectb/sandbox/plant/hybridum/software/bigtop/bin/../etc/tracks/histogram.conf
+debuggroup summary 2.14s found conf file /global/projectb/sandbox/plant/hybridum/software/bigtop/bin/../etc/tracks/line.conf
+debuggroup summary 2.14s processing track_0 histogram /global/projectb/scratch/llei2019/Bd21_3_mutant/circos/geneDensity.Bd21_3.250kb.tsv
+debuggroup summary 2.43s processing track_1 histogram /global/projectb/scratch/llei2019/Bd21_3_mutant/circos/TEdensity.Bd21_3.250kb.tsv
+debuggroup summary 2.69s processing track_2 histogram /global/projectb/scratch/llei2019/Bd21_3_mutant/circos/SNPdensity.Bd21_3.250kb.tsv
+debuggroup summary 2.92s processing track_3 line /global/projectb/scratch/llei2019/Bd21_3_mutant/circos/rec_rate_100kb.txt
+debuggroup summary 3.03s drawing track_0 histogram z 0 geneDensity.Bd21_3.250kb.tsv orient out
+debuggroup summary 3.08s found conf file /global/projectb/sandbox/plant/hybridum/software/bigtop/bin/../etc/tracks/axis.conf
+debuggroup summary 5.01s drawing track_1 histogram z 0 TEdensity.Bd21_3.250kb.tsv orient out
+debuggroup summary 5.06s found conf file /global/projectb/sandbox/plant/hybridum/software/bigtop/bin/../etc/tracks/axis.conf
+debuggroup summary 6.76s drawing track_2 histogram z 0 SNPdensity.Bd21_3.250kb.tsv orient out
+debuggroup summary 6.81s found conf file /global/projectb/sandbox/plant/hybridum/software/bigtop/bin/../etc/tracks/axis.conf
+debuggroup summary 8.66s drawing track_3 line z 0 rec_rate_100kb.txt orient out
+debuggroup summary 8.68s found conf file /global/projectb/sandbox/plant/hybridum/software/bigtop/bin/../etc/tracks/axis.conf
+debuggroup output 8.92s generating output
+debuggroup output 9.32s created PNG image /global/projectb/scratch/llei2019/Bd21_3_mutant/circos/circos.png (524 kb)
+debuggroup output 9.32s created SVG image /global/projectb/scratch/llei2019/Bd21_3_mutant/circos/circos.svg (2078 kb)
+(/global/projectb/sandbox/plant/hybridum/software/bigtop) 
+
+```
+#The conf file can be seen in the 
