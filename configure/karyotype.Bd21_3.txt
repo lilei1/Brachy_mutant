@@ -1,0 +1,5 @@
+chr - Bd1 Bd1 0 75545850 chr1
+chr - Bd2 Bd2 0 58866168 chr2
+chr - Bd3 Bd3 0 60014739 chr3
+chr - Bd4 Bd4 0 48751794 chr4
+chr - Bd5 Bd5 0 28914687 chr5
