@@ -124,4 +124,14 @@ debuggroup output 9.32s created SVG image /global/projectb/scratch/llei2019/Bd21
 (/global/projectb/sandbox/plant/hybridum/software/bigtop) 
 
 ```
-#The conf file can be seen in the 
+#The conf file can be seen in the configure directory
+
+Here are some commond lines to check the max value of each track
+
+
+```
+awk -F'\t' -v max=0 '{if($4 > max){content=$0; max=$4}}END{print content}' TEdensity.Bd21_3.250kb.tsv 
+
+ awk -F'\t' -v max=0 '{if($4 > max){content=$0; max=$4}}END{print content}'  rec_rate_100kb.txt
+
+```
