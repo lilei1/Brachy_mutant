@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #By Li Lei, 2021/09/14, El Cerrito
-#This is to match the dSNPs id to the biSNP count!!! Then I can run a bash script to 
+#This is to match the syn and nonsyn SNPs id to the biSNP count!!! Then I can run a bash script to 
 #
 #Usage: file1:dSNP file2: the SNP count
 
@@ -13,7 +13,7 @@ while (<INFILE>) {
 		$line = $_;
 		chomp $line;
 			my @array = split(/\t/, $line);
-			my $snpid = $array[1]; #creat the same key with gene id and aa positions;
+			my $snpid = $array[0]; #creat the same key with gene id and aa positions;
 				$hash{$snpid} = 999;
 			#print "$gene_cdsPos\n";
 }
