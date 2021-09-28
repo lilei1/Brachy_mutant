@@ -1,49 +1,37 @@
 #!/usr/bin/perl
-##by Li Lei, 2021-07-14, El Cerrito;
-#this is to extract genes with deleterious SNPs and high impact variants
-#You need have combined plates data and dSNPs file with masked or unmasked approaches!!!
-#usage: 
-use strict;
-use warnings;
-use Data::Dumper;
+#By Li Lei, 2021/09/22, El Cerrito
+#This is to match all othe dSNP, 
+#
+#Usage: file1:dSNP file2: the SNP count
 
-my $file1= $ARGV[0];
+my ($SNPtype, $SNPfile) = @ARGV;
+my %hash;
 
-my %hash_snp; #define a hash to store the positions for each SNP;
-my %hash_high;
-my %hash_del;
-my $total = 0;
-open(OUT,  "$file1") or die "Could not open $file1";
-#my $header = <OUT>;
-#print "$header";
-foreach my $row (<OUT>){
-        chomp $row;
-        my @rtemp = split(/\t/,$row);
-        push @{$hash_snp{$rtemp[13]}}, $rtemp[1];
-        push @{$hash_snp{$rtemp[13]}}, $rtemp[1];
-        push @{$hash_snp{$rtemp[13]}}, $rtemp[1];
- }
-close (OUT);
+open (INFILE, "< $SNPtype")or die "Can't open $SNPtype";
+#my $header = <INFILE>;
+while (<INFILE>) {
+		$line = $_;
+		chomp $line;
+			my @array = split(/\t/, $line);
+			my $sampleid = $array[0]; #creat the same key with gene id and aa positions;
+				$hash{$sampleid} = $line;
+			#print "$gene_cdsPos\n";
+}
+close OUTFILE;
 
-open(FILE,  "$file2") or die "Could not open $file2";
-#my $header = <FILE>;
-#print "$header";
-foreach my $row (<FILE>){
-        chomp $row;
-        my @rtemp = split(/\,/,$row);
-        my $snpid = $rtemp[2].".".$rtemp[3];
-        if (exists $hash {$snpid}){
-                if ($rtemp[14] =~ /NON_SYNONYMOUS/){
-                        print "$row\,$hash{$snpid}\n";
-                }
-                else{
-                        print "$row\,None\n";
-                }
-        }
-        else{
-                print "$row\,None\n";
-        }
-            
-        
- }
-close (FILE);
+open (EFFT, "< $SNPfile")or die "Can't open $SNPfile";
+#my $header = <EFFT>;
+#print "GeneID\tSNP_ID\tChromosome\tPosition\tSilent\tCodon_Position\tRef_Base\tAlt_Base\tAA1\tAA2\tCDS_Pos\tAA_Pos\tTranscript_ID\tAA_pos\tAlignedPosition\tL0\tL1\tConstraint\tChisquared\tP-value\tSeqCount\tAlignment\tReferenceAA\tMaskedConstraint\tMaskedP-value\tLogisticP_Unmasked\tLogisticP_Masked\n";
+while (<EFFT>) {
+		$line = $_;
+		chomp $line;
+			my @temp = split(/\t/, $line);
+			my $smplid = $temp[0];
+				#print "$key\n";
+			if (exists $hash{$smplid}){
+                print "$line\t$hash{$smplid}\n";
+			}
+
+}
+
+close EFFT;
