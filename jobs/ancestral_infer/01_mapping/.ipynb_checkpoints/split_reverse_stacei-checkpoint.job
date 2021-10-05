@@ -12,7 +12,7 @@ set -o pipefail
 
 WORK_DIR=/global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/Raw_Data/split_reads
 FILE_TO_SPLIT=/global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/Raw_Data/R2_2253.3.1833.fastq.gz
-PREFIX=stacei_R1_2253.3.1833_R1_part
+PREFIX=stacei_2253.3.1833_R2_part
 
 #	Check if working directory exists, if not make it
 mkdir -p "${WORK_DIR}"
