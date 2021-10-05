@@ -1,0 +1,33 @@
+#!/bin/bash
+#SBATCH --qos=genepool
+#SBATCH --time=10:00:00
+#SBATCH --nodes=10
+#SBATCH --account=plant
+#SBATCH --job-name=split_reverse_stacei
+#SBATCH --output=split_reverse_stacei.out
+#SBATCH --error=split_reverse_stacei.err
+
+set -e
+set -o pipefail
+
+WORK_DIR=/global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/Raw_Data/split_reads
+FILE_TO_SPLIT=/global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/Raw_Data/R2_2253.3.1833.fastq.gz
+PREFIX=stacei_R1_2253.3.1833_R1_part
+
+#	Check if working directory exists, if not make it
+mkdir -p "${WORK_DIR}"
+#	Go into working directory since split outputs files in current working directory
+cd "${WORK_DIR}"
+
+#	Split fastq file
+#	-d uses numerical suffix
+#	-a2 uses 2 digits for suffix
+#	-l is the number of lines to split on
+zcat "${FILE_TO_SPLIT}" | split -d -a2 -l 62004000 - "${PREFIX}"
+
+#	Add .fastq suffix to all output files
+for file in "${WORK_DIR}"/"${PREFIX}"*
+do
+	mv "$file" "$file.fastq"
+	gzip "$file.fastq"
+done
