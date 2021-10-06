@@ -1,0 +1,10 @@
+#!/bin/bash
+#SBATCH --qos=genepool
+#SBATCH --time=48:00:00
+#SBATCH --nodes=10
+#SBATCH --account=plant
+#SBATCH --job-name=convert_vcf_annovvar
+#SBATCH --output=convert_vcf_annovvar.out
+#SBATCH --error=convert_vcf_annovvar.err
+
+perl /global/projectb/scratch/llei2019/software/annovar/convert2annovar.pl --format vcf4 --allsample --withfreq --includeinfo --outfile /global/u2/l/llei2019/cscratch/Bdist_mutant/ANNOVAR/Bd21_3_annovar_in_SNPs.txt /global/cscratch1/sd/llei2019/Bdist_mutant/reanno_all/biSNPs_plate.0_24.gatk.hf.sc.vcf.recode.vcf
