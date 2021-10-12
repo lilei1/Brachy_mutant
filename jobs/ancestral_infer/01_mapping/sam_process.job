@@ -1,0 +1,91 @@
+#!/bin/bash
+#SBATCH --image=docker:broadinstitute/picard
+#SBATCH --qos=genepool
+#SBATCH --time=24:00:00
+#SBATCH --nodes=1
+#SBATCH --account=plant
+#SBATCH --job-name=samprocess
+#SBATCH --output=samprocess_stacei.out
+#SBATCH --error=samprocess_stacei.err
+
+set -e
+set -o pipefail
+
+sam_list="/global/u2/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/samlist_0.035.txt" # Where is our list of SAM files?
+outDirectory="/global/u2/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/"/SAM_Processing/Picard # Where do we store our results?
+platform="illumina" # What platform were our samples sequenced on?
+project="stacei" # What is the name of the project?
+maxFiles=1000
+picard_max_rec_in_ram=500000
+sort_coll_size_ratio=0.25
+    
+
+mkdir -p "${outDirectory}"/Statistics/Raw_SAM_Stats \
+         "${outDirectory}"/Statistics/Deduplicated_BAM_Stats \
+         "${outDirectory}"/Statistics/Finished_BAM_Stats \
+         "${outDirectory}"/Intermediates/Sorted \
+         "${outDirectory}"/Intermediates/Deduplicated
+
+
+#   Store list of sam files in an array
+sample_array=($(cat ${sam_list}))
+SAMFile="${sample_array[${SLURM_ARRAY_TASK_ID}]}"
+
+#   Order of project and tmp switched, so it works when TMP is empty
+sampleName=$(basename "${SAMFile}" .sam) 
+ 
+#	Picard tools to sort and index
+shifter -i broadinstitute/picard java -jar -Xmx15g /usr/picard/picard.jar SortSam \
+--INPUT "${SAMFile}" \
+--OUTPUT "${outDirectory}/Intermediates/Sorted/${sampleName}_sorted.bam"  \
+--SO coordinate \
+--VERBOSITY WARNING \
+--VALIDATION_STRINGENCY SILENT \
+--MAX_RECORDS_IN_RAM "${picard_max_rec_in_ram}"
+
+
+#	Then remove duplicates
+shifter -i broadinstitute/picard java -jar -Xmx15g /usr/picard/picard.jar MarkDuplicates \
+--INPUT "${outDirectory}/Intermediates/Sorted/${sampleName}_sorted.bam" \
+--OUTPUT "${outDirectory}/Intermediates/Deduplicated/${sampleName}_deduped.bam" \
+--METRICS_FILE "${outDirectory}/Statistics/Deduplicated_BAM_Stats/${sampleName}_deduplicated.txt" \
+--REMOVE_DUPLICATES true \
+--ASSUME_SORTED true \
+--VERBOSITY WARNING \
+-MAX_FILE_HANDLES_FOR_READ_ENDS_MAP "${maxFiles}" \
+--SORTING_COLLECTION_SIZE_RATIO "${sort_coll_size_ratio}" \
+--MAX_RECORDS_IN_RAM "${picard_max_rec_in_ram}"
+
+
+#	Then add read groups
+shifter -i broadinstitute/picard java -jar -Xmx15g /usr/picard/picard.jar AddOrReplaceReadGroups \
+--INPUT "${outDirectory}/Intermediates/Deduplicated/${sampleName}_deduped.bam" \
+-OUTPUT "${outDirectory}/${sampleName}.bam" \
+--RGID "${sampleName}" \
+--RGLB "${sampleName}" \
+--RGPL "${platform}" \
+--RGPU "${sampleName}" \
+--VERBOSITY WARNING \
+--RGSM "${sampleName}"
+
+
+#   Generate metrics on the finished BAM file
+samtools flagstat "${outDirectory}/${sampleName}.bam" > "${outDirectory}/Statistics/Finished_BAM_Stats/${sampleName}_finished.txt"
+
+#   Add the data from flagstat to the summary file
+num_reads=$(head -n 1 "${outDirectory}/Statistics/Finished_BAM_Stats/${sampleName}_finished.txt" | cut -f 1 -d " ")
+percent_mapped=$(grep "%" "${outDirectory}/Statistics/Finished_BAM_Stats/${sampleName}_finished.txt" | head -n 1 | cut -f 2 -d "(" | cut -f 1 -d " ")
+percent_paired=$(grep "%" "${outDirectory}/Statistics/Finished_BAM_Stats/${sampleName}_finished.txt" | head -n 2 | tail -n 1 | cut -f 2 -d "(" | cut -f 1 -d " ")
+percent_singleton=$(grep "%" "${outDirectory}/Statistics/Finished_BAM_Stats/${sampleName}_finished.txt" | tail -n 1 | cut -f 2 -d "(" | cut -f 1 -d " ")
+num_split_chr=$(tail -n 2 "${outDirectory}/Statistics/Finished_BAM_Stats/${sampleName}_finished.txt" | head -n 1 | cut -f 1 -d " ")
+percent_split_chr=$(echo "${num_split_chr}/${num_reads}" | bc -l)
+
+echo -e "${sampleName}\t${num_reads}\t${percent_mapped}\t${percent_paired}\t${percent_singleton}\t${percent_split_chr}" >> "${outDirectory}/Statistics/${project}_mapping_summary.tsv"
+
+#   Index the finished BAM file
+samtools index "${outDirectory}/${sampleName}.bam"
+#   Rename the index file
+mv "${outDirectory}/${sampleName}.bam.bai" "${outDirectory}/${sampleName}.bai"
+#   Remove intermediate files - comment out these lines if you need to troubleshoot
+rm "${outDirectory}/Intermediates/Sorted/${sampleName}_sorted.bam"
+rm "${outDirectory}/Intermediates/Deduplicated/${sampleName}_deduped.bam"

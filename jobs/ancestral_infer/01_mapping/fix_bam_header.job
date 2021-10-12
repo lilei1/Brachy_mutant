@@ -1,0 +1,32 @@
+#!/bin/bash
+#SBATCH --qos=genepool
+#SBATCH --time=10:00:00
+#SBATCH --nodes=1
+#SBATCH --account=plant
+#SBATCH --job-name=fixheader
+#SBATCH --output=fixheader.out
+#SBATCH --error=fixheader.err
+
+set -e
+set -o pipefail
+
+#   Dependencies
+module load parallel
+
+
+#   User provided arguments
+FIX_BAM_HEADER_SCRIPT=/global/projectb/scratch/llei2019/Bd21_3_mutant/Brachy_mutant/jobs/ancestral_infer/01_mapping/fixBAMHeader.sh
+TABLE=/global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/bam_reheader_table.txt
+PLATFORM=ILLUMINA
+SAMPLE_LIST=/global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_bam_list_0.035.txt
+
+mkdir /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/reheader_bam
+
+OUT_DIR=/global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/reheader_bam
+
+#   Run program
+"${FIX_BAM_HEADER_SCRIPT}" -t "${TABLE}" \
+                           -p "${PLATFORM}" \
+                           -s "${SAMPLE_LIST}" \
+                           -o "${OUT_DIR}"
+

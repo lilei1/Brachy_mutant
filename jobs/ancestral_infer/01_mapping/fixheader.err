@@ -1,0 +1,51 @@
+master /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_bam_list_0.035.txt stacei_2253.3.1833_R1_part05_0.035 stacei_0.035 ILLUMINA /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/reheader_bam
+master /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_bam_list_0.035.txt stacei_2253.3.1833_R1_part04_0.035 stacei_0.035 ILLUMINA /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/reheader_bam
+master /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_bam_list_0.035.txt stacei_2253.3.1833_R1_part03_0.035 stacei_0.035 ILLUMINA /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/reheader_bam
+master /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_bam_list_0.035.txt stacei_2253.3.1833_R1_part09_0.035 stacei_0.035 ILLUMINA /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/reheader_bam
+master /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_bam_list_0.035.txt stacei_2253.3.1833_R1_part10_0.035 stacei_0.035 ILLUMINA /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/reheader_bam
+master /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_bam_list_0.035.txt stacei_2253.3.1833_R1_part01_0.035 stacei_0.035 ILLUMINA /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/reheader_bam
+master /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_bam_list_0.035.txt stacei_2253.3.1833_R1_part07_0.035 stacei_0.035 ILLUMINA /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/reheader_bam
+master /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_bam_list_0.035.txt stacei_2253.3.1833_R1_part06_0.035 stacei_0.035 ILLUMINA /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/reheader_bam
+master /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_bam_list_0.035.txt stacei_2253.3.1833_R1_part02_0.035 stacei_0.035 ILLUMINA /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/reheader_bam
+master /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_bam_list_0.035.txt stacei_2253.3.1833_R1_part00_0.035 stacei_0.035 ILLUMINA /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/reheader_bam
+master /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_bam_list_0.035.txt stacei_2253.3.1833_R1_part08_0.035 stacei_0.035 ILLUMINA /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/reheader_bam
+reheader /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part07_0.035.bam stacei_2253.3.1833_R1_part07_0.035 stacei_0.035 ILLUMINA /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/reheader_bam '2253:3'
++ samtools view -H /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part07_0.035.bam
++ sed -e s/SM:stacei_2253.3.1833_R1_part07_0.035/SM:stacei_0.035/ -e s/PU:stacei_2253.3.1833_R1_part07_0.035/PU:2253:3/ -e s/PL:illumina/PL:ILLUMINA/
++ samtools reheader - /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part07_0.035.bam
+reheader /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part09_0.035.bam stacei_2253.3.1833_R1_part09_0.035 stacei_0.035 ILLUMINA /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/reheader_bam '2253:3'
++ samtools view -H /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part09_0.035.bam
++ sed -e s/SM:stacei_2253.3.1833_R1_part09_0.035/SM:stacei_0.035/ -e s/PU:stacei_2253.3.1833_R1_part09_0.035/PU:2253:3/ -e s/PL:illumina/PL:ILLUMINA/
++ samtools reheader - /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part09_0.035.bam
+reheader /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part06_0.035.bam stacei_2253.3.1833_R1_part06_0.035 stacei_0.035 ILLUMINA /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/reheader_bam '2253:3'
++ samtools view -H /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part06_0.035.bam
++ sed -e s/SM:stacei_2253.3.1833_R1_part06_0.035/SM:stacei_0.035/ -e s/PU:stacei_2253.3.1833_R1_part06_0.035/PU:2253:3/ -e s/PL:illumina/PL:ILLUMINA/
++ samtools reheader - /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part06_0.035.bam
+reheader /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part00_0.035.bam stacei_2253.3.1833_R1_part00_0.035 stacei_0.035 ILLUMINA /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/reheader_bam '2253:3'
++ samtools view -H /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part00_0.035.bam
++ sed -e s/SM:stacei_2253.3.1833_R1_part00_0.035/SM:stacei_0.035/ -e s/PU:stacei_2253.3.1833_R1_part00_0.035/PU:2253:3/ -e s/PL:illumina/PL:ILLUMINA/
++ samtools reheader - /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part00_0.035.bam
+reheader /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part02_0.035.bam stacei_2253.3.1833_R1_part02_0.035 stacei_0.035 ILLUMINA /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/reheader_bam '2253:3'
++ samtools view -H /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part02_0.035.bam
++ sed -e s/SM:stacei_2253.3.1833_R1_part02_0.035/SM:stacei_0.035/ -e s/PU:stacei_2253.3.1833_R1_part02_0.035/PU:2253:3/ -e s/PL:illumina/PL:ILLUMINA/
++ samtools reheader - /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part02_0.035.bam
+reheader /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part01_0.035.bam stacei_2253.3.1833_R1_part01_0.035 stacei_0.035 ILLUMINA /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/reheader_bam '2253:3'
++ samtools view -H /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part01_0.035.bam
++ sed -e s/SM:stacei_2253.3.1833_R1_part01_0.035/SM:stacei_0.035/ -e s/PU:stacei_2253.3.1833_R1_part01_0.035/PU:2253:3/ -e s/PL:illumina/PL:ILLUMINA/
++ samtools reheader - /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part01_0.035.bam
+reheader /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part03_0.035.bam stacei_2253.3.1833_R1_part03_0.035 stacei_0.035 ILLUMINA /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/reheader_bam '2253:3'
++ samtools view -H /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part03_0.035.bam
++ sed -e s/SM:stacei_2253.3.1833_R1_part03_0.035/SM:stacei_0.035/ -e s/PU:stacei_2253.3.1833_R1_part03_0.035/PU:2253:3/ -e s/PL:illumina/PL:ILLUMINA/
++ samtools reheader - /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part03_0.035.bam
+reheader /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part04_0.035.bam stacei_2253.3.1833_R1_part04_0.035 stacei_0.035 ILLUMINA /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/reheader_bam '2253:3'
++ sed -e s/SM:stacei_2253.3.1833_R1_part04_0.035/SM:stacei_0.035/ -e s/PU:stacei_2253.3.1833_R1_part04_0.035/PU:2253:3/ -e s/PL:illumina/PL:ILLUMINA/
++ samtools view -H /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part04_0.035.bam
++ samtools reheader - /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part04_0.035.bam
+reheader /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part08_0.035.bam stacei_2253.3.1833_R1_part08_0.035 stacei_0.035 ILLUMINA /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/reheader_bam '2253:3'
++ samtools view -H /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part08_0.035.bam
++ sed -e s/SM:stacei_2253.3.1833_R1_part08_0.035/SM:stacei_0.035/ -e s/PU:stacei_2253.3.1833_R1_part08_0.035/PU:2253:3/ -e s/PL:illumina/PL:ILLUMINA/
++ samtools reheader - /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part08_0.035.bam
+reheader /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part05_0.035.bam stacei_2253.3.1833_R1_part05_0.035 stacei_0.035 ILLUMINA /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/reheader_bam '2253:3'
++ samtools view -H /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part05_0.035.bam
++ sed -e s/SM:stacei_2253.3.1833_R1_part05_0.035/SM:stacei_0.035/ -e s/PU:stacei_2253.3.1833_R1_part05_0.035/PU:2253:3/ -e s/PL:illumina/PL:ILLUMINA/
++ samtools reheader - /global/homes/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/SAM_Processing/Picard/stacei_2253.3.1833_R1_part05_0.035.bam

@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --image=docker:thanhleviet/stampy:latest
 #SBATCH --qos=jgi_exvivo
-#SBATCH --time=96:00:00
+#SBATCH --time=36:00:00
 #SBATCH --nodes=1
 #SBATCH --account=plant
 #SBATCH --job-name=align_stampy
@@ -21,7 +21,8 @@ REF_PREFIX='ABR114'
 #   What directory contains our reference files?
 REF_DIR='/global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/Reference/'
 #   What is our per site substitution rate?
-DIVERGENCE='0.035'
+#DIVERGENCE='0.035'
+DIVERGENCE='0.13'
 #   Where do our output files go?
 OUT_DIR='/global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out'
 #   What is our read FILE?
@@ -53,7 +54,7 @@ function stampy_map() {
     #   Note: naming scheme is specific to this set of samples
     #   i.e. murinum_Forward_ScytheTrimmed_part00.fastq.gz
     # i.e. stacei_2253.3.1833_R2_part00.fastq.gz
-    local sample_name=$(basename ${sample_fwd} .fastq.gz | cut -d '_' -f 1,2,3,4)
+    local sample_name=$(basename ${sample_fwd} .fastq.gz | cut -d '_' -f 1,2,4)
     #   Check if SAM file exists, if so delete. Stampy errors out if file exists
     if [ -f ${out_dir}/${sample_name}_${divergence}.sam ]
     then
