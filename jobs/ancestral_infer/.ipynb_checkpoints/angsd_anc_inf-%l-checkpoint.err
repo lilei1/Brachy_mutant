@@ -1,0 +1,4 @@
+	-> angsd version: 0278d2b (htslib: 1.7-6-g6d2bfb7) build(Feb  9 2018 19:05:01)
+	-> Reading fasta: /global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/stacei_0.03.fasta.fa.gz
+	-> fai index file: '/global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/stacei_0.03.fasta.fa.gz.fai' looks older than corresponding fastafile: '/global/cscratch1/sd/llei2019/Bdist_mutant/ancerstral_infer/out/stacei_0.03.fasta.fa.gz'.
+	-> Please reindex fasta file
