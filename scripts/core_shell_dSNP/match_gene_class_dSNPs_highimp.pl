@@ -24,7 +24,7 @@ close (OUT);
 
 open(FILE,  "$file2") or die "Could not open $file2";
 #my $header1 = <FILE>;
-print "Gene_Id\tnb_dSNPs\tdSNPs\tnb_HISNPs\tHISNPs\tclass\n";
+print "Gene_Id\tnb_synSNPs\tsynSNPs\tnb_dSNPs\tdSNPs\tnb_HISNPs\tHISNPs\tclass\n";
 my $gid;
 foreach my $row (<FILE>){
         chomp $row;
