@@ -23,8 +23,7 @@ close (OUT);
 
 open(FILE,  "$file2") or die "Could not open $file2";
 my $header1 = <FILE>;
-print "SNPID\tAncBase\tDerivedBase\tNum_Anc\tNum_Het\tNum_Derived\tAnc_Samples
-\tHet_Samples\tDerived_Samples\n";
+print "SNPID\tAncBase\tDerivedBase\tNum_Anc\tNum_Het\tNum_Derived\tAnc_Samples\tHet_Samples\tDerived_Samples\n";
 my $gid;
 foreach my $row (<FILE>){
     chomp $row;
