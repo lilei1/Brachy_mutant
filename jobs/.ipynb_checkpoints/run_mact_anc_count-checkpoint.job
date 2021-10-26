@@ -1,0 +1,10 @@
+#!/bin/bash
+#SBATCH --qos=jgi_exvivo
+#SBATCH --time=24:00:00
+#SBATCH --nodes=1
+#SBATCH --account=plant
+#SBATCH --job-name=match_anc.count
+#SBATCH --output=match_anc.count.out
+#SBATCH --error=match_anc.count.err
+
+perl /global/projectb/scratch/llei2019/Bd21_3_mutant/Brachy_mutant/scripts/match_ancestral2count.pl /global/u2/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/stacei_0.035_mutant_pro.mafs /global/u2/l/llei2019/bscratch/Bd21_3_mutant/natural_lines/data/onlySNP_filtered_treatmissing_biallilic_filtered_passs_genotype_gvcfs.f1.bf=g10-G3-Q40-QD5.anno_mafgt0.0044.recode.count >/global/u2/l/llei2019/bscratch/Bd21_3_mutant/natural_lines/data/onlySNP_filtered_treatmissing_biallilic_filtered_passs_genotype_gvcfs.f1.bf=g10-G3-Q40-QD5.anno_mafgt0.0044.recode.anc.count

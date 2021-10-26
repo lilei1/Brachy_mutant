@@ -1,0 +1,10 @@
+#!/bin/bash
+#SBATCH --qos=jgi_exvivo
+#SBATCH --time=10:00:00
+#SBATCH --nodes=1
+#SBATCH --account=plant
+#SBATCH --job-name=run_match_ancestral
+#SBATCH --output=run_match_ancestral_com-%l.out
+#SBATCH --error=run_match_ancestral-com%l.err
+
+perl /global/projectb/scratch/llei2019/Bd21_3_mutant/Brachy_mutant/scripts/match_ancestral2vcf.pl /global/u2/l/llei2019/cscratch/Bdist_mutant/ancerstral_infer/out/stacei_0.035_mutant_pro.mafs /global/u2/l/llei2019/bscratch/Bd21_3_mutant/natural_lines/data/common_variants_SNPs.recode.vcf >/global/u2/l/llei2019/bscratch/Bd21_3_mutant/natural_lines/data/common_variants_SNPs_anc.recode.vcf
