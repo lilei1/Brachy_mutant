@@ -37,15 +37,21 @@ make_intervals <- function(endpoints) {
   #outPrefix <- args [4] #outfile prefix (do not include file extension)
   #outDir <- args[5] # 4) where do our output files go?
   
-bedfile <- "/global/cfs/cdirs/plantbox/llei/bscratch/llei2019/Bd21_3_mutant/circos/SNP_density/reorder_SNPs_EMS_no_scaffold.bed"
+#bedfile <- "/global/cfs/cdirs/plantbox/llei/bscratch/llei2019/Bd21_3_mutant/circos/SNP_density/reorder_SNPs_EMS_no_scaffold.bed"
 #bedfile <- "/global/cfs/cdirs/plantbox/llei/bscratch/llei2019/Bd21_3_mutant/circos/SNP_density/reorder_SNPs_NaN_no_scaffold.bed"
 #bedfile <- "/global/cfs/cdirs/plantbox/llei/bscratch/llei2019/Bd21_3_mutant/circos/SNP_density/reorder_SNPs_FN.bed"
+#bedfile <- "/global/cfs/cdirs/plantbox/llei/bscratch/llei2019/Bd21_3_mutant/circos/SNP_density/sorted_Indel_EMS.bed"
+#bedfile <- "/global/cfs/cdirs/plantbox/llei/bscratch/llei2019/Bd21_3_mutant/circos/SNP_density/sorted_Indel_FN_no_scaffold.bed"
+bedfile <- "/global/cfs/cdirs/plantbox/llei/bscratch/llei2019/Bd21_3_mutant/circos/SNP_density/sorted_Indel_NaN_no_scaffold.bed"
 
 chrome <- "/global/cfs/cdirs/plantbox/llei/bscratch/llei2019/Bd21_3_mutant/circos/SNP_density/Chromosome_size.txt"
 win_size <- 500000
 #outPrefix <- "FN_SNPs"
 #outPrefix <- "NaN_SNPs"
-outPrefix <- "EMS_SNPs"
+#outPrefix <- "EMS_SNPs"
+#outPrefix <- "FN_Dels"
+outPrefix <- "NaN_Dels"
+#outPrefix <- "EMS_Dels"
 outDir <- "/global/cfs/cdirs/plantbox/llei/bscratch/llei2019/Bd21_3_mutant/circos/SNP_density/"
 
   capture <- read.table(bedfile, header=F)
