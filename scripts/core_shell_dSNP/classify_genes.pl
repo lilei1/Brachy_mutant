@@ -3,9 +3,9 @@
 #this is to classify the genes into diffferent categories based on Grdon't at al 2017 criteria;
 
 ############################
-#Core genes: all 56 lines!!#
-#softcare genes: 53-55     #
-#shell:3-52                #
+#Core genes: all 55 lines!!#
+#softcare genes: 52-54     #
+#shell:3-51                #
 #cloud genes: 1-2 lines!!!!#
 ############################
 #You need have combined plates data and dSNPs file with masked or unmasked approaches!!!
@@ -31,13 +31,13 @@ foreach my $row (<OUT>){
                         $count++;
                 }
         }
-        if ($count == 56){
+        if ($count == 55){
                 print "$ngid\tcore\n";
         }
-        elsif($count >= 53 and $count <= 55){
+        elsif($count >= 52 and $count <= 54){
                 print "$ngid\tsoftcore\n";
         }
-        elsif($count >= 3 and $count <= 52){
+        elsif($count >= 3 and $count <= 51){
                 print "$ngid\tshell\n";
         }
         elsif($count >= 1 and $count <= 2){
