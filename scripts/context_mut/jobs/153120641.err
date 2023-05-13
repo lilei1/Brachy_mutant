@@ -1,0 +1,17 @@
+
+VCFtools - 0.1.15
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--gzvcf /home/morrellp/llei/context_test/Brachy/mutant/plate.0_24.gatk.hf.sc.vcf.gz
+	--keep /home/morrellp/llei/context_test/Brachy/mutant/NaN_acc.txt
+	--recode-INFO-all
+	--out /home/morrellp/llei/context_test/Brachy/mutant/NaN_plate.0_24.gatk.hf.sc
+	--recode
+
+Using zlib version: 1.2.7
+Keeping individuals in 'keep' list
+After filtering, kept 1878 out of 1972 Individuals
+Outputting VCF file...
+After filtering, kept 2644916 out of a possible 2644916 Sites
+Run Time = 10317.00 seconds

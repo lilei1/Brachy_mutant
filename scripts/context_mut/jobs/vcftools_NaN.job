@@ -1,0 +1,14 @@
+#!/bin/bash
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=16
+#SBATCH -t 12:00:00
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=llei@umn.edu
+#SBATCH -p small,ram256g,ram1t
+#SBATCH -o %j.out
+#SBATCH -e %j.err
+
+set -e
+set -o pipefail
+
+vcftools --gzvcf /home/morrellp/llei/context_test/Brachy/mutant/plate.0_24.gatk.hf.sc.vcf.gz --keep /home/morrellp/llei/context_test/Brachy/mutant/NaN_acc.txt --recode --recode-INFO-all --out /home/morrellp/llei/context_test/Brachy/mutant/NaN_plate.0_24.gatk.hf.sc
