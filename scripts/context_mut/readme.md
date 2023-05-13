@@ -1043,3 +1043,765 @@ realpath *to*.txt | sort -uV > separate_counts_file_list.txt
 ./context_analysis-mut_snps_EMS.sh 
 ```
 
+
+## Run natural 
+
+```
+module load bcftools
+```
+
+#### - compress
+
+```
+sbatch --mem=80gb --nodes=1 --mail-user=llei@umn.edu -p ram256g,ram1t -t 1:00:00 --wrap="module load bcftools && bcftools view /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/common_variants_SNPs.recode.vcf -Oz -o /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/common_variants_SNPs.recode.vcf.gz"
+sbatch: Setting account: morrellp
+Submitted batch job 156796542
+
+```
+
+```
+bcftools index common_variants_SNPs.recode.vcf.gz
+```
+#### - filter
+```
+sbatch --mem=80gb --nodes=1 --mail-user=llei@umn.edu -p ram256g,ram1t -t 12:00:00 --wrap="module load bcftools &&  bcftools view -f PASS -m2 -M2 -v snps -R /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/chr_only.bed /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/common_variants_SNPs.recode.vcf.gz -Oz -o /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/filter_common_variants_SNPs.recode.vcf.gz"
+sbatch: Setting account: morrellp
+Submitted batch job 156797072
+```
+
+```
+bcftools index filter_common_variants_SNPs.recode.vcf.gz
+```
+### - Rare:
+
+#### - compress
+```
+sbatch --mem=80gb --nodes=1 --mail-user=llei@umn.edu -p ram256g,ram1t -t 1:00:00 --wrap="module load bcftools && bcftools view /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/rare_variants_SNPs.recode.vcf -Oz -o /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/rare_variants_SNPs.recode.vcf.gz"
+sbatch: Setting account: morrellp
+Submitted batch job 156796212
+```
+```
+bcftools index  rare_variants_SNPs.recode.vcf.gz
+```
+
+#### - filter
+```
+sbatch --mem=80gb --nodes=1 --mail-user=llei@umn.edu -p ram256g,ram1t -t 12:00:00 --wrap="module load bcftools &&  bcftools view -f PASS -m2 -M2 -v snps -R /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/chr_only.bed /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/rare_variants_SNPs.recode.vcf.gz -Oz -o /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/filter_rare_variants_SNPs.recode.vcf.gz"
+sbatch: Setting account: morrellp
+Submitted batch job 156796773
+```
+```
+bcftools index filter_rare_variants_SNPs.recode.vcf.gz
+```
+#### edit the [prep_counts_table-mut_snps_rare.sh]()
+
+```
+ sbatch prep_counts_table-mut_snps_rare.sh
+```
+
+```
+realpath *to*.txt | sort -uV > separate_counts_file_list.txt
+```
+
+### edit [context_analysis-mut_snps_rare.sh]()
+
+```
+./context_analysis-mut_snps_rare.sh 
+WARNING: $PATH does not agree with $PATH_modshare counter. The following directories' usage counters were adjusted to match. Note that this may mean that module unloading may not work correctly.
+ /panfs/roc/groups/9/morrellp/llei/softwares/RAxML-7.2.8-ALPHA/ /panfs/roc/groups/9/morrellp/llei/.aspera/connect/bin/
+Academic tradition requires you to cite works you base your article on.
+If you use programs that use GNU Parallel to process data for an article in a
+scientific publication, please cite:
+
+  Tange, O. (2021, August 22). GNU Parallel 20210822 ('Kabul').
+  Zenodo. https://doi.org/10.5281/zenodo.5233953
+
+This helps funding further development; AND IT WON'T COST YOU A CENT.
+If you pay 10000 EUR you should feel free to use GNU Parallel without citing.
+
+More about funding GNU Parallel and the citation notice:
+https://www.gnu.org/software/parallel/parallel_design.html#Citation-notice
+
+To silence this citation notice: run 'parallel --citation' once.
+
+Come on: You have run parallel 38 times. Isn't it about time 
+you run 'parallel --citation' once to silence the citation notice?
+
+simple_analysis /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/counts_tables/AtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/simple_analysis rare_natural.winFlank15bp rare_natural.SNPs
+simple_analysis /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/counts_tables/AtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/simple_analysis rare_natural.winFlank15bp rare_natural.SNPs
+simple_analysis /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/counts_tables/AtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/simple_analysis rare_natural.winFlank15bp rare_natural.SNPs
+simple_analysis /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/counts_tables/CtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/simple_analysis rare_natural.winFlank15bp rare_natural.SNPs
+simple_analysis /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/counts_tables/CtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/simple_analysis rare_natural.winFlank15bp rare_natural.SNPs
+simple_analysis /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/counts_tables/CtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/simple_analysis rare_natural.winFlank15bp rare_natural.SNPs
+simple_analysis /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/counts_tables/GtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/simple_analysis rare_natural.winFlank15bp rare_natural.SNPs
+simple_analysis /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/counts_tables/GtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/simple_analysis rare_natural.winFlank15bp rare_natural.SNPs
+simple_analysis /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/counts_tables/GtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/simple_analysis rare_natural.winFlank15bp rare_natural.SNPs
+simple_analysis /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/counts_tables/TtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/simple_analysis rare_natural.winFlank15bp rare_natural.SNPs
+simple_analysis /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/counts_tables/TtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/simple_analysis rare_natural.winFlank15bp rare_natural.SNPs
+simple_analysis /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/counts_tables/TtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/simple_analysis rare_natural.winFlank15bp rare_natural.SNPs
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/simple_analysis/GtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt for your results
+`1.pdf' -> `1_GtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`2.pdf' -> `2_GtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`3.pdf' -> `3_GtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`4.pdf' -> `4_GtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`summary.pdf' -> `summary_GtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`1.json' -> `1_GtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`2.json' -> `2_GtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`3.json' -> `3_GtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`4.json' -> `4_GtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`summary.txt' -> `summary_GtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/simple_analysis/TtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt for your results
+`1.pdf' -> `1_TtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`2.pdf' -> `2_TtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`3.pdf' -> `3_TtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`4.pdf' -> `4_TtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`summary.pdf' -> `summary_TtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`1.json' -> `1_TtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`2.json' -> `2_TtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`3.json' -> `3_TtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`4.json' -> `4_TtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`summary.txt' -> `summary_TtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/simple_analysis/TtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt for your results
+`1.pdf' -> `1_TtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`2.pdf' -> `2_TtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`3.pdf' -> `3_TtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`4.pdf' -> `4_TtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`summary.pdf' -> `summary_TtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`1.json' -> `1_TtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`2.json' -> `2_TtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`3.json' -> `3_TtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`4.json' -> `4_TtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`summary.txt' -> `summary_TtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/simple_analysis/AtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt for your results
+`1.pdf' -> `1_AtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`2.pdf' -> `2_AtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`3.pdf' -> `3_AtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`4.pdf' -> `4_AtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`summary.pdf' -> `summary_AtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`1.json' -> `1_AtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`2.json' -> `2_AtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`3.json' -> `3_AtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`4.json' -> `4_AtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`summary.txt' -> `summary_AtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/simple_analysis/AtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt for your results
+`1.pdf' -> `1_AtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`2.pdf' -> `2_AtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`3.pdf' -> `3_AtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`4.pdf' -> `4_AtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`summary.pdf' -> `summary_AtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`1.json' -> `1_AtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`2.json' -> `2_AtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`3.json' -> `3_AtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`4.json' -> `4_AtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`summary.txt' -> `summary_AtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/simple_analysis/CtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt for your results
+`1.pdf' -> `1_CtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`2.pdf' -> `2_CtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`3.pdf' -> `3_CtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`4.pdf' -> `4_CtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`summary.pdf' -> `summary_CtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`1.json' -> `1_CtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`2.json' -> `2_CtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`3.json' -> `3_CtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`4.json' -> `4_CtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`summary.txt' -> `summary_CtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/simple_analysis/AtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt for your results
+`1.pdf' -> `1_AtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`2.pdf' -> `2_AtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`3.pdf' -> `3_AtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`4.pdf' -> `4_AtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`summary.pdf' -> `summary_AtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`1.json' -> `1_AtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`2.json' -> `2_AtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`3.json' -> `3_AtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`4.json' -> `4_AtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`summary.txt' -> `summary_AtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/simple_analysis/CtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt for your results
+`1.pdf' -> `1_CtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`2.pdf' -> `2_CtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`3.pdf' -> `3_CtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`4.pdf' -> `4_CtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`summary.pdf' -> `summary_CtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`1.json' -> `1_CtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`2.json' -> `2_CtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`3.json' -> `3_CtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`4.json' -> `4_CtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`summary.txt' -> `summary_CtoG_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/simple_analysis/CtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt for your results
+`1.pdf' -> `1_CtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`2.pdf' -> `2_CtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`3.pdf' -> `3_CtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`4.pdf' -> `4_CtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`summary.pdf' -> `summary_CtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`1.json' -> `1_CtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`2.json' -> `2_CtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`3.json' -> `3_CtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`4.json' -> `4_CtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`summary.txt' -> `summary_CtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/simple_analysis/TtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt for your results
+`1.pdf' -> `1_TtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`2.pdf' -> `2_TtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`3.pdf' -> `3_TtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`4.pdf' -> `4_TtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`summary.pdf' -> `summary_TtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`1.json' -> `1_TtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`2.json' -> `2_TtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`3.json' -> `3_TtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`4.json' -> `4_TtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`summary.txt' -> `summary_TtoC_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/simple_analysis/GtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt for your results
+`1.pdf' -> `1_GtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`2.pdf' -> `2_GtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`3.pdf' -> `3_GtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`4.pdf' -> `4_GtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`summary.pdf' -> `summary_GtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`1.json' -> `1_GtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`2.json' -> `2_GtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`3.json' -> `3_GtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`4.json' -> `4_GtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`summary.txt' -> `summary_GtoA_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/simple_analysis/GtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt for your results
+`1.pdf' -> `1_GtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`2.pdf' -> `2_GtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`3.pdf' -> `3_GtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`4.pdf' -> `4_GtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`summary.pdf' -> `summary_GtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.pdf'
+`1.json' -> `1_GtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`2.json' -> `2_GtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`3.json' -> `3_GtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`4.json' -> `4_GtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.json'
+`summary.txt' -> `summary_GtoT_filter_rare_variants_SNPs.recode.winFlank15bp.txt_rare_natural.SNPs.txt'
+Academic tradition requires you to cite works you base your article on.
+If you use programs that use GNU Parallel to process data for an article in a
+scientific publication, please cite:
+
+  Tange, O. (2021, August 22). GNU Parallel 20210822 ('Kabul').
+  Zenodo. https://doi.org/10.5281/zenodo.5233953
+
+This helps funding further development; AND IT WON'T COST YOU A CENT.
+If you pay 10000 EUR you should feel free to use GNU Parallel without citing.
+
+More about funding GNU Parallel and the citation notice:
+https://www.gnu.org/software/parallel/parallel_design.html#Citation-notice
+
+To silence this citation notice: run 'parallel --citation' once.
+
+Come on: You have run parallel 39 times. Isn't it about time 
+you run 'parallel --citation' once to silence the citation notice?
+
+test_strand_symmetry AtoC /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/counts_tables/combined_counts_filter_rare_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/strand_symmetry_analysis rare_natural.winFlank15bp rare_natural.SNPs
+test_strand_symmetry AtoG /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/counts_tables/combined_counts_filter_rare_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/strand_symmetry_analysis rare_natural.winFlank15bp rare_natural.SNPs
+test_strand_symmetry AtoT /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/counts_tables/combined_counts_filter_rare_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/strand_symmetry_analysis rare_natural.winFlank15bp rare_natural.SNPs
+test_strand_symmetry CtoA /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/counts_tables/combined_counts_filter_rare_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/strand_symmetry_analysis rare_natural.winFlank15bp rare_natural.SNPs
+test_strand_symmetry CtoG /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/counts_tables/combined_counts_filter_rare_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/strand_symmetry_analysis rare_natural.winFlank15bp rare_natural.SNPs
+test_strand_symmetry CtoT /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/counts_tables/combined_counts_filter_rare_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/strand_symmetry_analysis rare_natural.winFlank15bp rare_natural.SNPs
+test_strand_symmetry GtoA /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/counts_tables/combined_counts_filter_rare_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/strand_symmetry_analysis rare_natural.winFlank15bp rare_natural.SNPs
+test_strand_symmetry GtoC /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/counts_tables/combined_counts_filter_rare_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/strand_symmetry_analysis rare_natural.winFlank15bp rare_natural.SNPs
+test_strand_symmetry GtoT /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/counts_tables/combined_counts_filter_rare_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/strand_symmetry_analysis rare_natural.winFlank15bp rare_natural.SNPs
+test_strand_symmetry TtoA /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/counts_tables/combined_counts_filter_rare_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/strand_symmetry_analysis rare_natural.winFlank15bp rare_natural.SNPs
+test_strand_symmetry TtoC /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/counts_tables/combined_counts_filter_rare_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/strand_symmetry_analysis rare_natural.winFlank15bp rare_natural.SNPs
+test_strand_symmetry TtoG /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/counts_tables/combined_counts_filter_rare_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/strand_symmetry_analysis rare_natural.winFlank15bp rare_natural.SNPs
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/strand_symmetry_analysis/AtoC for your results
+`1.pdf' -> `1_AtoC_rare_natural.SNPs.pdf'
+`2.pdf' -> `2_AtoC_rare_natural.SNPs.pdf'
+`3.pdf' -> `3_AtoC_rare_natural.SNPs.pdf'
+`4.pdf' -> `4_AtoC_rare_natural.SNPs.pdf'
+`summary.pdf' -> `summary_AtoC_rare_natural.SNPs.pdf'
+`1.json' -> `1_AtoC_rare_natural.SNPs.json'
+`2.json' -> `2_AtoC_rare_natural.SNPs.json'
+`3.json' -> `3_AtoC_rare_natural.SNPs.json'
+`4.json' -> `4_AtoC_rare_natural.SNPs.json'
+`summary.txt' -> `summary_AtoC_rare_natural.SNPs.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/strand_symmetry_analysis/AtoG for your results
+`1.pdf' -> `1_AtoG_rare_natural.SNPs.pdf'
+`2.pdf' -> `2_AtoG_rare_natural.SNPs.pdf'
+`3.pdf' -> `3_AtoG_rare_natural.SNPs.pdf'
+`4.pdf' -> `4_AtoG_rare_natural.SNPs.pdf'
+`summary.pdf' -> `summary_AtoG_rare_natural.SNPs.pdf'
+`1.json' -> `1_AtoG_rare_natural.SNPs.json'
+`2.json' -> `2_AtoG_rare_natural.SNPs.json'
+`3.json' -> `3_AtoG_rare_natural.SNPs.json'
+`4.json' -> `4_AtoG_rare_natural.SNPs.json'
+`summary.txt' -> `summary_AtoG_rare_natural.SNPs.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/strand_symmetry_analysis/CtoA for your results
+`1.pdf' -> `1_CtoA_rare_natural.SNPs.pdf'
+`2.pdf' -> `2_CtoA_rare_natural.SNPs.pdf'
+`3.pdf' -> `3_CtoA_rare_natural.SNPs.pdf'
+`4.pdf' -> `4_CtoA_rare_natural.SNPs.pdf'
+`summary.pdf' -> `summary_CtoA_rare_natural.SNPs.pdf'
+`1.json' -> `1_CtoA_rare_natural.SNPs.json'
+`2.json' -> `2_CtoA_rare_natural.SNPs.json'
+`3.json' -> `3_CtoA_rare_natural.SNPs.json'
+`4.json' -> `4_CtoA_rare_natural.SNPs.json'
+`summary.txt' -> `summary_CtoA_rare_natural.SNPs.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/strand_symmetry_analysis/CtoT for your results
+`1.pdf' -> `1_CtoT_rare_natural.SNPs.pdf'
+`2.pdf' -> `2_CtoT_rare_natural.SNPs.pdf'
+`3.pdf' -> `3_CtoT_rare_natural.SNPs.pdf'
+`4.pdf' -> `4_CtoT_rare_natural.SNPs.pdf'
+`summary.pdf' -> `summary_CtoT_rare_natural.SNPs.pdf'
+`1.json' -> `1_CtoT_rare_natural.SNPs.json'
+`2.json' -> `2_CtoT_rare_natural.SNPs.json'
+`3.json' -> `3_CtoT_rare_natural.SNPs.json'
+`4.json' -> `4_CtoT_rare_natural.SNPs.json'
+`summary.txt' -> `summary_CtoT_rare_natural.SNPs.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/strand_symmetry_analysis/AtoT for your results
+`1.pdf' -> `1_AtoT_rare_natural.SNPs.pdf'
+`2.pdf' -> `2_AtoT_rare_natural.SNPs.pdf'
+`3.pdf' -> `3_AtoT_rare_natural.SNPs.pdf'
+`4.pdf' -> `4_AtoT_rare_natural.SNPs.pdf'
+`summary.pdf' -> `summary_AtoT_rare_natural.SNPs.pdf'
+`1.json' -> `1_AtoT_rare_natural.SNPs.json'
+`2.json' -> `2_AtoT_rare_natural.SNPs.json'
+`3.json' -> `3_AtoT_rare_natural.SNPs.json'
+`4.json' -> `4_AtoT_rare_natural.SNPs.json'
+`summary.txt' -> `summary_AtoT_rare_natural.SNPs.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/rare_natural/mutation_motif/combined_counts_rare_filter.SNPs/strand_symmetry_analysis/CtoG for your results
+`1.pdf' -> `1_CtoG_rare_natural.SNPs.pdf'
+`2.pdf' -> `2_CtoG_rare_natural.SNPs.pdf'
+`3.pdf' -> `3_CtoG_rare_natural.SNPs.pdf'
+`4.pdf' -> `4_CtoG_rare_natural.SNPs.pdf'
+`summary.pdf' -> `summary_CtoG_rare_natural.SNPs.pdf'
+`1.json' -> `1_CtoG_rare_natural.SNPs.json'
+`2.json' -> `2_CtoG_rare_natural.SNPs.json'
+`3.json' -> `3_CtoG_rare_natural.SNPs.json'
+`4.json' -> `4_CtoG_rare_natural.SNPs.json'
+`summary.txt' -> `summary_CtoG_rare_natural.SNPs.txt'
+Start base=A  RE=0.000001  :  Dev=1.02  :  df=2  :  p=0.601268990723816
+Start base=C  RE=0.000000  :  Dev=0.13  :  df=2  :  p=0.9353581390568536
+Done spectra!
+`spectra.pdf' -> `spectra_rare_natural.SNPs.pdf'
+`spectra_analysis.json' -> `spectra_analysis_rare_natural.SNPs.json'
+`spectra_summary.txt' -> `spectra_summary_rare_natural.SNPs.txt'
+(mut_motif) llei@ln0006 [~/context_test/Brachy/scripts] % 
+
+
+
+./context_analysis-mut_snps_com.sh
+./context_analysis-mut_snps_com.sh
+WARNING: $PATH does not agree with $PATH_modshare counter. The following directories' usage counters were adjusted to match. Note that this may mean that module unloading may not work correctly.
+ /panfs/roc/groups/9/morrellp/llei/softwares/RAxML-7.2.8-ALPHA/ /panfs/roc/groups/9/morrellp/llei/.aspera/connect/bin/
+Academic tradition requires you to cite works you base your article on.
+If you use programs that use GNU Parallel to process data for an article in a
+scientific publication, please cite:
+
+  Tange, O. (2021, August 22). GNU Parallel 20210822 ('Kabul').
+  Zenodo. https://doi.org/10.5281/zenodo.5233953
+
+This helps funding further development; AND IT WON'T COST YOU A CENT.
+If you pay 10000 EUR you should feel free to use GNU Parallel without citing.
+
+More about funding GNU Parallel and the citation notice:
+https://www.gnu.org/software/parallel/parallel_design.html#Citation-notice
+
+To silence this citation notice: run 'parallel --citation' once.
+
+Come on: You have run parallel 40 times. Isn't it about time 
+you run 'parallel --citation' once to silence the citation notice?
+
+simple_analysis /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/counts_tables/AtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/simple_analysis com.natural.winFlank15bp com.natural
+simple_analysis /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/counts_tables/AtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/simple_analysis com.natural.winFlank15bp com.natural
+simple_analysis /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/counts_tables/AtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/simple_analysis com.natural.winFlank15bp com.natural
+simple_analysis /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/counts_tables/CtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/simple_analysis com.natural.winFlank15bp com.natural
+simple_analysis /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/counts_tables/CtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/simple_analysis com.natural.winFlank15bp com.natural
+simple_analysis /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/counts_tables/CtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/simple_analysis com.natural.winFlank15bp com.natural
+simple_analysis /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/counts_tables/GtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/simple_analysis com.natural.winFlank15bp com.natural
+simple_analysis /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/counts_tables/GtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/simple_analysis com.natural.winFlank15bp com.natural
+simple_analysis /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/counts_tables/GtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/simple_analysis com.natural.winFlank15bp com.natural
+simple_analysis /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/counts_tables/TtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/simple_analysis com.natural.winFlank15bp com.natural
+simple_analysis /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/counts_tables/TtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/simple_analysis com.natural.winFlank15bp com.natural
+simple_analysis /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/counts_tables/TtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/simple_analysis com.natural.winFlank15bp com.natural
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/simple_analysis/GtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt for your results
+`1.pdf' -> `1_GtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`2.pdf' -> `2_GtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`3.pdf' -> `3_GtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`4.pdf' -> `4_GtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`summary.pdf' -> `summary_GtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`1.json' -> `1_GtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`2.json' -> `2_GtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`3.json' -> `3_GtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`4.json' -> `4_GtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`summary.txt' -> `summary_GtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/simple_analysis/AtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt for your results
+`1.pdf' -> `1_AtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`2.pdf' -> `2_AtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`3.pdf' -> `3_AtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`4.pdf' -> `4_AtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`summary.pdf' -> `summary_AtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`1.json' -> `1_AtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`2.json' -> `2_AtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`3.json' -> `3_AtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`4.json' -> `4_AtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`summary.txt' -> `summary_AtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/simple_analysis/AtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt for your results
+`1.pdf' -> `1_AtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`2.pdf' -> `2_AtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`3.pdf' -> `3_AtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`4.pdf' -> `4_AtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`summary.pdf' -> `summary_AtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`1.json' -> `1_AtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`2.json' -> `2_AtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`3.json' -> `3_AtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`4.json' -> `4_AtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`summary.txt' -> `summary_AtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/simple_analysis/AtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt for your results
+`1.pdf' -> `1_AtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`2.pdf' -> `2_AtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`3.pdf' -> `3_AtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`4.pdf' -> `4_AtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`summary.pdf' -> `summary_AtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`1.json' -> `1_AtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`2.json' -> `2_AtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`3.json' -> `3_AtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`4.json' -> `4_AtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`summary.txt' -> `summary_AtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/simple_analysis/CtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt for your results
+`1.pdf' -> `1_CtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`2.pdf' -> `2_CtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`3.pdf' -> `3_CtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`4.pdf' -> `4_CtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`summary.pdf' -> `summary_CtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`1.json' -> `1_CtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`2.json' -> `2_CtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`3.json' -> `3_CtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`4.json' -> `4_CtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`summary.txt' -> `summary_CtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/simple_analysis/CtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt for your results
+`1.pdf' -> `1_CtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`2.pdf' -> `2_CtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`3.pdf' -> `3_CtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`4.pdf' -> `4_CtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`summary.pdf' -> `summary_CtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`1.json' -> `1_CtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`2.json' -> `2_CtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`3.json' -> `3_CtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`4.json' -> `4_CtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`summary.txt' -> `summary_CtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/simple_analysis/GtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt for your results
+`1.pdf' -> `1_GtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`2.pdf' -> `2_GtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`3.pdf' -> `3_GtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`4.pdf' -> `4_GtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`summary.pdf' -> `summary_GtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`1.json' -> `1_GtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`2.json' -> `2_GtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`3.json' -> `3_GtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`4.json' -> `4_GtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`summary.txt' -> `summary_GtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/simple_analysis/GtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt for your results
+`1.pdf' -> `1_GtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`2.pdf' -> `2_GtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`3.pdf' -> `3_GtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`4.pdf' -> `4_GtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`summary.pdf' -> `summary_GtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`1.json' -> `1_GtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`2.json' -> `2_GtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`3.json' -> `3_GtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`4.json' -> `4_GtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`summary.txt' -> `summary_GtoT_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/simple_analysis/TtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt for your results
+`1.pdf' -> `1_TtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`2.pdf' -> `2_TtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`3.pdf' -> `3_TtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`4.pdf' -> `4_TtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`summary.pdf' -> `summary_TtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`1.json' -> `1_TtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`2.json' -> `2_TtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`3.json' -> `3_TtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`4.json' -> `4_TtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`summary.txt' -> `summary_TtoC_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/simple_analysis/CtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt for your results
+`1.pdf' -> `1_CtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`2.pdf' -> `2_CtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`3.pdf' -> `3_CtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`4.pdf' -> `4_CtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`summary.pdf' -> `summary_CtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`1.json' -> `1_CtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`2.json' -> `2_CtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`3.json' -> `3_CtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`4.json' -> `4_CtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`summary.txt' -> `summary_CtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/simple_analysis/TtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt for your results
+`1.pdf' -> `1_TtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`2.pdf' -> `2_TtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`3.pdf' -> `3_TtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`4.pdf' -> `4_TtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`summary.pdf' -> `summary_TtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`1.json' -> `1_TtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`2.json' -> `2_TtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`3.json' -> `3_TtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`4.json' -> `4_TtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`summary.txt' -> `summary_TtoG_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/simple_analysis/TtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt for your results
+`1.pdf' -> `1_TtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`2.pdf' -> `2_TtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`3.pdf' -> `3_TtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`4.pdf' -> `4_TtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`summary.pdf' -> `summary_TtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.pdf'
+`1.json' -> `1_TtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`2.json' -> `2_TtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`3.json' -> `3_TtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`4.json' -> `4_TtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.json'
+`summary.txt' -> `summary_TtoA_filter_common_variants_SNPs.recode.winFlank15bp.txt_com.natural.txt'
+Academic tradition requires you to cite works you base your article on.
+If you use programs that use GNU Parallel to process data for an article in a
+scientific publication, please cite:
+
+  Tange, O. (2021, August 22). GNU Parallel 20210822 ('Kabul').
+  Zenodo. https://doi.org/10.5281/zenodo.5233953
+
+This helps funding further development; AND IT WON'T COST YOU A CENT.
+If you pay 10000 EUR you should feel free to use GNU Parallel without citing.
+
+More about funding GNU Parallel and the citation notice:
+https://www.gnu.org/software/parallel/parallel_design.html#Citation-notice
+
+To silence this citation notice: run 'parallel --citation' once.
+
+Come on: You have run parallel 41 times. Isn't it about time 
+you run 'parallel --citation' once to silence the citation notice?
+
+test_strand_symmetry AtoC /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/counts_tables/combined_counts_filter_common_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/strand_symmetry_analysis com.natural.winFlank15bp com.natural
+test_strand_symmetry AtoG /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/counts_tables/combined_counts_filter_common_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/strand_symmetry_analysis com.natural.winFlank15bp com.natural
+test_strand_symmetry AtoT /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/counts_tables/combined_counts_filter_common_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/strand_symmetry_analysis com.natural.winFlank15bp com.natural
+test_strand_symmetry CtoA /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/counts_tables/combined_counts_filter_common_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/strand_symmetry_analysis com.natural.winFlank15bp com.natural
+test_strand_symmetry CtoG /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/counts_tables/combined_counts_filter_common_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/strand_symmetry_analysis com.natural.winFlank15bp com.natural
+test_strand_symmetry CtoT /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/counts_tables/combined_counts_filter_common_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/strand_symmetry_analysis com.natural.winFlank15bp com.natural
+test_strand_symmetry GtoA /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/counts_tables/combined_counts_filter_common_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/strand_symmetry_analysis com.natural.winFlank15bp com.natural
+test_strand_symmetry GtoC /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/counts_tables/combined_counts_filter_common_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/strand_symmetry_analysis com.natural.winFlank15bp com.natural
+test_strand_symmetry GtoT /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/counts_tables/combined_counts_filter_common_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/strand_symmetry_analysis com.natural.winFlank15bp com.natural
+test_strand_symmetry TtoA /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/counts_tables/combined_counts_filter_common_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/strand_symmetry_analysis com.natural.winFlank15bp com.natural
+test_strand_symmetry TtoC /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/counts_tables/combined_counts_filter_common_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/strand_symmetry_analysis com.natural.winFlank15bp com.natural
+test_strand_symmetry TtoG /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/counts_tables/combined_counts_filter_common_variants_SNPs.recode.winFlank15bp.txt /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/strand_symmetry_analysis com.natural.winFlank15bp com.natural
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/strand_symmetry_analysis/AtoT for your results
+`1.pdf' -> `1_AtoT_com.natural.pdf'
+`2.pdf' -> `2_AtoT_com.natural.pdf'
+`3.pdf' -> `3_AtoT_com.natural.pdf'
+`4.pdf' -> `4_AtoT_com.natural.pdf'
+`summary.pdf' -> `summary_AtoT_com.natural.pdf'
+`1.json' -> `1_AtoT_com.natural.json'
+`2.json' -> `2_AtoT_com.natural.json'
+`3.json' -> `3_AtoT_com.natural.json'
+`4.json' -> `4_AtoT_com.natural.json'
+`summary.txt' -> `summary_AtoT_com.natural.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/strand_symmetry_analysis/CtoA for your results
+`1.pdf' -> `1_CtoA_com.natural.pdf'
+`2.pdf' -> `2_CtoA_com.natural.pdf'
+`3.pdf' -> `3_CtoA_com.natural.pdf'
+`4.pdf' -> `4_CtoA_com.natural.pdf'
+`summary.pdf' -> `summary_CtoA_com.natural.pdf'
+`1.json' -> `1_CtoA_com.natural.json'
+`2.json' -> `2_CtoA_com.natural.json'
+`3.json' -> `3_CtoA_com.natural.json'
+`4.json' -> `4_CtoA_com.natural.json'
+`summary.txt' -> `summary_CtoA_com.natural.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/strand_symmetry_analysis/CtoT for your results
+`1.pdf' -> `1_CtoT_com.natural.pdf'
+`2.pdf' -> `2_CtoT_com.natural.pdf'
+`3.pdf' -> `3_CtoT_com.natural.pdf'
+`4.pdf' -> `4_CtoT_com.natural.pdf'
+`summary.pdf' -> `summary_CtoT_com.natural.pdf'
+`1.json' -> `1_CtoT_com.natural.json'
+`2.json' -> `2_CtoT_com.natural.json'
+`3.json' -> `3_CtoT_com.natural.json'
+`4.json' -> `4_CtoT_com.natural.json'
+`summary.txt' -> `summary_CtoT_com.natural.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/strand_symmetry_analysis/AtoC for your results
+`1.pdf' -> `1_AtoC_com.natural.pdf'
+`2.pdf' -> `2_AtoC_com.natural.pdf'
+`3.pdf' -> `3_AtoC_com.natural.pdf'
+`4.pdf' -> `4_AtoC_com.natural.pdf'
+`summary.pdf' -> `summary_AtoC_com.natural.pdf'
+`1.json' -> `1_AtoC_com.natural.json'
+`2.json' -> `2_AtoC_com.natural.json'
+`3.json' -> `3_AtoC_com.natural.json'
+`4.json' -> `4_AtoC_com.natural.json'
+`summary.txt' -> `summary_AtoC_com.natural.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/strand_symmetry_analysis/CtoG for your results
+`1.pdf' -> `1_CtoG_com.natural.pdf'
+`2.pdf' -> `2_CtoG_com.natural.pdf'
+`3.pdf' -> `3_CtoG_com.natural.pdf'
+`4.pdf' -> `4_CtoG_com.natural.pdf'
+`summary.pdf' -> `summary_CtoG_com.natural.pdf'
+`1.json' -> `1_CtoG_com.natural.json'
+`2.json' -> `2_CtoG_com.natural.json'
+`3.json' -> `3_CtoG_com.natural.json'
+`4.json' -> `4_CtoG_com.natural.json'
+`summary.txt' -> `summary_CtoG_com.natural.txt'
+Doing single position analysis
+Doing two positions analysis
+Doing three positions analysis
+Doing four positions analysis
+Done! Check /panfs/jay/groups/9/morrellp/llei/context_test/Brachy/mutant/results/com_natural/mutation_motif/combined_counts_com_natural.SNPs/strand_symmetry_analysis/AtoG for your results
+`1.pdf' -> `1_AtoG_com.natural.pdf'
+`2.pdf' -> `2_AtoG_com.natural.pdf'
+`3.pdf' -> `3_AtoG_com.natural.pdf'
+`4.pdf' -> `4_AtoG_com.natural.pdf'
+`summary.pdf' -> `summary_AtoG_com.natural.pdf'
+`1.json' -> `1_AtoG_com.natural.json'
+`2.json' -> `2_AtoG_com.natural.json'
+`3.json' -> `3_AtoG_com.natural.json'
+`4.json' -> `4_AtoG_com.natural.json'
+`summary.txt' -> `summary_AtoG_com.natural.txt'
+Start base=C  RE=0.000001  :  Dev=4.97  :  df=2  :  p=0.08323929271509731
+Start base=A  RE=0.000001  :  Dev=2.97  :  df=2  :  p=0.22658983427793933
+Done spectra!
+`spectra.pdf' -> `spectra_com.natural.pdf'
+`spectra_analysis.json' -> `spectra_analysis_com.natural.json'
+`spectra_summary.txt' -> `spectra_summary_com.natural.txt'
+
+```
+
+#### - count the motifs
+```
+(mut_motif) llei@ln0006 [~/context_test/Brachy/scripts] % 
+
+module load emboss/6.6.0
+
+compseq -sequence only_Bd_BdistachyonBd21_3_460_v1.0.fa -word 2 -outfile dinucleotide_only_Bd_BdistachyonBd21_3_460_v1.0.comp
+
+compseq -sequence only_Bd_BdistachyonBd21_3_460_v1.0.fa -word 3 -outfile trinucleotide_only_Bd_BdistachyonBd21_3_460_v1.0.comp
+
+compseq -sequence only_Bd_BdistachyonBd21_3_460_v1.0.fa -word 4 -outfile fournucleotide_only_Bd_BdistachyonBd21_3_460_v1.0.comp
+
+```
