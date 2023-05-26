@@ -1,0 +1,12 @@
+#!/bin/bash
+#SBATCH --qos=genepool
+#SBATCH --time=10:00:00
+#SBATCH --nodes=1
+#SBATCH --account=plant
+#SBATCH --job-name=run_R_filtersite_dist
+#SBATCH --output=run_R_filtersite_dist.out
+#SBATCH --error=run_R_filtersite_dist.err
+
+#module load python3
+
+perl /global/projectb/scratch/llei2019/Bd21_3_mutant/natural_lines/scripts/classify_variants.pl /global/projectb/scratch/llei2019/Bd21_3_mutant/natural_lines/data/filtered_treatmissing_biallilic_filtered_passs_genotype_gvcfs.f1.bf=g10-G3-Q40-QD5.anno_mafgt0.0044.recode.maf /global/projectb/scratch/llei2019/Bd21_3_mutant/natural_lines/data/filtered_treatmissing_biallilic_filtered_passs_genotype_gvcfs.f1.bf=g10-G3-Q40-QD5.anno.vcf.recode.vcf /global/projectb/scratch/llei2019/Bd21_3_mutant/natural_lines/data/rare_variants.vcf /global/projectb/scratch/llei2019/Bd21_3_mutant/natural_lines/data/common_variants.vcf
