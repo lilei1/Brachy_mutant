@@ -1,6 +1,6 @@
 Objective: This tutorial is to filter the variants from diverse lines.
 
-The vcf file called with GATK by Jie is : `/global/projectb/sandbox/reseq/projects/working/Brachypodium_distachyon_redux_Bd21-3/set_distanchyon_redo/genotype_gvcfs.f1.bf=g10-G3-Q40-QD5.anno.vcf.gz`
+The vcf file is called with GATK by using Joel Martin's pipeline and the file is : `/global/projectb/sandbox/reseq/projects/working/Brachypodium_distachyon_redux_Bd21-3/set_distanchyon_redo/genotype_gvcfs.f1.bf=g10-G3-Q40-QD5.anno.vcf.gz`
 
 
 What we need to do?
